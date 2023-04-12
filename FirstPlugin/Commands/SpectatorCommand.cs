@@ -2,6 +2,7 @@
 using PlayerRoles;
 using RemoteAdmin;
 using System;
+using PluginAPI.Core;
 
 
 namespace FirstPlugin.Comands
@@ -19,13 +20,15 @@ namespace FirstPlugin.Comands
         {
             if (sender is PlayerCommandSender playerCommandSender)
             {
+                var target = Player.Get((playerCommandSender)?.SenderId);
                 playerCommandSender.ReferenceHub.roleManager.ServerSetRole(RoleTypeId.Spectator, RoleChangeReason.None);
-                response = "Yes";
+                TutorialPlugin.TutorialPlugin.SCPController.deleteSCP(target);
+                response = "Player is Spectator";
                 return false;
             }
             else
             {
-                response = "Hello Nigga";
+                response = string.Empty;
                 return true;
             }
         }

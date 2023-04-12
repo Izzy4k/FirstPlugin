@@ -3,6 +3,7 @@ using Exiled.API.Features;
 using System;
 using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.Handlers.Player;
+using FirstPlugin.Features;
 
 namespace TutorialPlugin
 {
@@ -11,6 +12,8 @@ namespace TutorialPlugin
         private static readonly Lazy<TutorialPlugin> LazyInstance = new Lazy<TutorialPlugin>(() => new TutorialPlugin());
         public static TutorialPlugin Instance { get { return LazyInstance.Value; } }
 
+        private static readonly Lazy<SCPController> LazySCPController = new Lazy<SCPController>(() => new SCPController());
+        public static SCPController SCPController { get { return LazySCPController.Value; } }
         public override PluginPriority Priority => PluginPriority.Medium;
 
         private Handlers.Player player;
@@ -35,6 +38,7 @@ namespace TutorialPlugin
             Server.RoundStarted += server.onRoundStarted;
             Player.Verified += player.onVerified;
             Player.Left += player.onLeft;
+            Player.Died += player.onDied;
         }
         public void UnregisterEvents()
         {
@@ -42,6 +46,7 @@ namespace TutorialPlugin
             Server.RoundStarted -= server.onRoundStarted;
             Player.Left -= player.onLeft;
             Player.Verified -= player.onVerified;
+            Player.Died -= player.onDied;
             player = null;
             server = null;
         }

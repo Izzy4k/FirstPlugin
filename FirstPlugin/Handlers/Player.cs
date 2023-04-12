@@ -20,5 +20,9 @@ namespace TutorialPlugin.Handlers
             var message = temp.Replace(player, args.Player.Nickname);
              Map.Broadcast(6, message);
         }
+        public void onDied(DiedEventArgs args)
+        {
+            TutorialPlugin.SCPController.deleteSCP(args.Player);
+        }
     }
 }

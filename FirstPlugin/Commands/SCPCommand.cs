@@ -2,11 +2,10 @@
 using PluginAPI.Core;
 using System;
 
-
 namespace FirstPlugin.Comands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    public class SCPCommand : ICommand
+     class SCPCommand : ICommand
     {
         public string Command => "scp1956";
 
@@ -24,6 +23,15 @@ namespace FirstPlugin.Comands
                 response = "Игрок не найден!";
                 return false;
             }
+            if (TutorialPlugin.TutorialPlugin.SCPController.IsSCP(target))
+            {
+                response = "Игрок уже гей";
+                return true;
+            }
+
+            TutorialPlugin.TutorialPlugin.SCPController.setSCP(target);
+            response = "Соболезную игроку";
+            return true;
         }
     }
 }

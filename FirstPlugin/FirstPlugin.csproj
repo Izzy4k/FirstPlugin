@@ -70,10 +70,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comands\ApartCommand.cs" />
     <Compile Include="Comands\FirstCommand.cs" />
     <Compile Include="Comands\SCPCommand.cs" />
     <Compile Include="Comands\SpectatorCommand.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Features\SCPController.cs" />
     <Compile Include="Handlers\Player.cs" />
     <Compile Include="Handlers\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

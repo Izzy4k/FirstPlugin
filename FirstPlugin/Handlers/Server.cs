@@ -6,7 +6,7 @@ namespace TutorialPlugin.Handlers
     {
         public void onWaitingForPlayers()
         {
-            Log.Info("Waiting for players...");
+            Log.Info("I love my dog!");
         }
         public void onRoundStarted()
         {
