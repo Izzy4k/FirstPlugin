@@ -1,5 +1,5 @@
 ﻿using CommandSystem;
-using PluginAPI.Core;
+using Exiled.API.Features;
 using System;
 
 namespace FirstPlugin.Comands
@@ -15,9 +15,13 @@ namespace FirstPlugin.Comands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            var target = arguments.Count > 0 && int.TryParse(arguments.At(0), out var targetId)
-                  ? Player.Get(targetId)
-                  : Player.Get((sender as CommandSender)?.SenderId);
+            if(arguments.Count < 1) {
+
+                response = "Неверный синтаксис! Используйте scp1956 [id]";
+                return false;
+            }
+
+            var target = Player.Get(arguments.At(0));
             if(target == null)
             {
                 response = "Игрок не найден!";

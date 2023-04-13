@@ -68,12 +68,17 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comands\ApartCommand.cs" />
-    <Compile Include="Comands\FirstCommand.cs" />
-    <Compile Include="Comands\SCPCommand.cs" />
-    <Compile Include="Comands\SpectatorCommand.cs" />
+    <Compile Include="Commands\ApartCommand.cs" />
+    <Compile Include="Commands\CreateCommand.cs" />
+    <Compile Include="Commands\FirstCommand.cs" />
+    <Compile Include="Commands\SCPCommand.cs" />
+    <Compile Include="Commands\SpectatorCommand.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Features\SCPController.cs" />
     <Compile Include="Handlers\Player.cs" />

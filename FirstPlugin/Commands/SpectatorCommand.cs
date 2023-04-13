@@ -2,7 +2,7 @@
 using PlayerRoles;
 using RemoteAdmin;
 using System;
-using PluginAPI.Core;
+using Exiled.API.Features;
 
 
 namespace FirstPlugin.Comands

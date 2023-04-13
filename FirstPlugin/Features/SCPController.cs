@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using Exiled.API.Features;
 using Exiled.API.Features.Items;
+using UnityEngine;
+using Exiled.API.Features.Pickups;
 
 namespace FirstPlugin.Features
 {
@@ -10,6 +12,8 @@ namespace FirstPlugin.Features
     {
 
         public Dictionary<Player, int> Snapshots { get; } = new Dictionary<Player, int>();
+
+
         public bool IsSCP(Player player)
         {
             return Snapshots.ContainsKey(player);
@@ -17,12 +21,12 @@ namespace FirstPlugin.Features
 
         public void setSCP(Player player)
         {
-            Snapshots[player] = 0;
+            Snapshots.Add(player, 0);
             try
             {
                 player.ReferenceHub.roleManager.ServerSetRole(RoleTypeId.ClassD, RoleChangeReason.None);
                 player.Health = 500;
-                player.Scale = new UnityEngine.Vector3(1.5f, 0.5f, 0.5f);
+                player.Scale = new Vector3(1.5f, 0.5f, 0.5f);
                 player.Broadcast(6, "Теперь ты чOрный Таджик :((");
             } catch (Exception e)
             {
@@ -38,19 +42,98 @@ namespace FirstPlugin.Features
         private Item deleteItem(Player player)
         {
             var item = player.CurrentItem;
-            player.CurrentItem.Destroy();
+            player.RemoveItem(item);
             return item;
+        }
+        private bool isHaveItem(Item item)
+        {
+            return item != null;
         }
         public void startApart(Player player)
         {
-            var target = deleteItem(player);
-            Snapshots[player] = GetPoint(target.Type);
-            player.Broadcast(10, "Ты гей");
+            if (isHaveItem(player.CurrentItem))
+            {
+                var target = deleteItem(player);
+                Snapshots[player] = Snapshots[player] + GetPoint(target.Type);
+                player.Broadcast(10, "Ты гей");
+            }
+            else
+            {
+                player.Broadcast(10, "Ты бомж! Какие тебе очки? Иди отсюда, животное.");
+            }
         }
 
         private void defaultScale(Player player)
         {
-            player.Scale = new UnityEngine.Vector3(1f,1f, 1f);
+            player.Scale = new Vector3(1f,1f, 1f);
+        }
+        public void startCreate(Player player)
+        {
+            if (IsPoint(player))
+            {
+                var vector = GetSpawnPosition(player);
+                var message = string.Empty;
+                var list = getItems(player);
+                foreach (var item in list)
+                {
+                    createItem(item, vector);
+                }
+                if (list.Count == 1)
+                {
+                    message = "Поздравляю вы истратили все очки. Где-то заспавнился предмет!";
+                }
+                else if (list.Count > 1)
+                {
+                    message = "Поздравляю вы истратили все очки. Где-то заспавнились предметы!";
+                }
+                else
+                {
+                    message = "Упс. Очков видимо не хватило...";
+                }
+                player.Broadcast(6, message);
+            }
+            else
+            {
+                player.Broadcast(6, "Ты бомж!");
+            }
+        }
+        private void createItem(ItemType type, Vector3 vector)
+        {
+            Pickup.CreateAndSpawn(type,vector,default);
+        }
+        private Vector3 GetSpawnPosition(Player player)
+        {
+            var playerPos = player.Position;
+            float x = UnityEngine.Random.Range(-1, 1);
+            float z = UnityEngine.Random.Range(-1, 1);
+            var offset = new Vector3(x,playerPos.y, z);
+            return playerPos + offset;
+        }
+        private List<ItemType> getItems(Player player)
+        {
+            ItemType[] itemTypes = (ItemType[])Enum.GetValues(typeof(ItemType));
+            var items = new List<ItemType>();
+            while (Snapshots[player] > 0)
+            {
+                var randomItemType = itemTypes[UnityEngine.Random.Range(0, itemTypes.Length)];
+                var point = GetPoint(randomItemType);
+                if (Snapshots[player] > point)
+                {
+                    items.Add(randomItemType);
+                    Snapshots[player] -= point;
+                }
+                else
+                {
+                    Snapshots[player] -=10;
+                }
+            }
+            return items;
+        }
+        
+        private bool IsPoint(Player player)
+        {
+            if (Snapshots[player] <= 0) return false;
+            return true;
         }
         private int GetPoint(ItemType item)
         {

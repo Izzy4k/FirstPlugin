@@ -1,5 +1,5 @@
 ﻿using CommandSystem;
-using PluginAPI.Core;
+using Exiled.API.Features;
 using System;
 
 namespace FirstPlugin.Comands
@@ -7,7 +7,7 @@ namespace FirstPlugin.Comands
     [CommandHandler(typeof(ClientCommandHandler))]
    public class ApartCommand : ICommand
     {
-        public string Command => ".apart";
+        public string Command { get; } = "apart";
 
         public string[] Aliases => Array.Empty<string>();
 
@@ -29,8 +29,8 @@ namespace FirstPlugin.Comands
                     response = "Гей использовал команду";
                     return true;
                 }
-                response = string.Empty;
-                return true;
+                response = "Недоступная команда!";
+                return false;
             }
             
             }
