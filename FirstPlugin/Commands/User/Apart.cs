@@ -5,7 +5,7 @@ using System;
 namespace FirstPlugin.Comands
 {
     [CommandHandler(typeof(ClientCommandHandler))]
-   public class ApartCommand : ICommand
+    public class Apart : ICommand
     {
         public string Command { get; } = "apart";
 
@@ -16,22 +16,25 @@ namespace FirstPlugin.Comands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            
-                var target = Player.Get((sender as CommandSender)?.SenderId);
-                if (target == null)
-                {
-                    response = "Игрок не найден!";
-                    return false;
-                }
-                if (TutorialPlugin.TutorialPlugin.SCPController.IsSCP(target))
-                {
-                    TutorialPlugin.TutorialPlugin.SCPController.startApart(target);
-                    response = "Гей использовал команду";
-                    return true;
-                }
-                response = "Недоступная команда!";
+            var target = Player.Get((sender as CommandSender)?.SenderId);
+
+            if (target == null)
+            {
+                response = "Игрок не найден!";
                 return false;
             }
-            
+
+            if (TutorialPlugin.TutorialPlugin.SCPController.IsSCP(target))
+            {
+                TutorialPlugin.TutorialPlugin.ApartController.StartApart(target);
+
+                response = "Игрок использовал команду";
+                return true;
             }
+
+            response = "Недоступная команда!";
+            return false;
+        }
+
+    }
 }

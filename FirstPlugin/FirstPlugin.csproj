@@ -74,17 +74,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ApartCommand.cs" />
-    <Compile Include="Commands\CreateCommand.cs" />
-    <Compile Include="Commands\FirstCommand.cs" />
-    <Compile Include="Commands\SCPCommand.cs" />
-    <Compile Include="Commands\SpectatorCommand.cs" />
+    <Compile Include="Api\Events\Player\EventPlayer.cs" />
+    <Compile Include="Commands\User\Apart.cs" />
+    <Compile Include="Commands\User\Create.cs" />
+    <Compile Include="Commands\Admin\SCP1956.cs" />
+    <Compile Include="Commands\User\Spectator.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="Features\SCPController.cs" />
-    <Compile Include="Handlers\Player.cs" />
-    <Compile Include="Handlers\Server.cs" />
+    <Compile Include="Features\Apart\ApartController.cs" />
+    <Compile Include="Features\Create\CreateController.cs" />
+    <Compile Include="Features\SCP\SCPController.cs" />
+    <Compile Include="Events\Internal\Player.cs" />
+    <Compile Include="Events\Internal\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TutorialPlugin.cs" />
+    <Compile Include="Utils\PointTools.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

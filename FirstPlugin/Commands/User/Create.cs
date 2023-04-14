@@ -5,7 +5,7 @@ using Exiled.API.Features;
 namespace FirstPlugin.Commands
 {
     [CommandHandler(typeof(ClientCommandHandler))]
-    public class CreateCommand : ICommand
+    public class Create : ICommand
     {
         public string Command => "create";
 
@@ -16,19 +16,22 @@ namespace FirstPlugin.Commands
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             var target = Player.Get((sender as CommandSender)?.SenderId);
-            if(target == null)
+
+            if (target == null)
             {
-                response = "Игрок не найден";
+                response = "Игрок не найден!";
                 return false;
             }
+
             if (TutorialPlugin.TutorialPlugin.SCPController.IsSCP(target))
             {
-                TutorialPlugin.TutorialPlugin.SCPController.startCreate(target);
-                response = "Гей использовал команду";
+                TutorialPlugin.TutorialPlugin.CreateController.StartCreate(target);
+
+                response = "Игрок использовал команду!";
                 return true;
             }
 
-            response = string.Empty;
+            response = "Команда недоступна!";
             return false;
         }
     }

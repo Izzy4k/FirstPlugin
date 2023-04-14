@@ -5,7 +5,7 @@ using System;
 namespace FirstPlugin.Comands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-     class SCPCommand : ICommand
+    class SCP1956 : ICommand
     {
         public string Command => "scp1956";
 
@@ -15,25 +15,29 @@ namespace FirstPlugin.Comands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            if(arguments.Count < 1) {
+            if (arguments.Count < 1)
+            {
 
                 response = "Неверный синтаксис! Используйте scp1956 [id]";
                 return false;
             }
 
             var target = Player.Get(arguments.At(0));
-            if(target == null)
+
+            if (target == null)
             {
                 response = "Игрок не найден!";
                 return false;
             }
+
             if (TutorialPlugin.TutorialPlugin.SCPController.IsSCP(target))
             {
-                response = "Игрок уже гей";
+                response = "Игрок уже SCP-1956";
                 return true;
             }
 
-            TutorialPlugin.TutorialPlugin.SCPController.setSCP(target);
+            TutorialPlugin.TutorialPlugin.SCPController.SetSCP(target);
+
             response = "Соболезную игроку";
             return true;
         }
