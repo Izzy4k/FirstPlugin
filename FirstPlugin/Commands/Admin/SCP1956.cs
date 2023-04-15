@@ -5,7 +5,7 @@ using System;
 namespace FirstPlugin.Comands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    class SCP1956 : ICommand
+   public sealed class SCP1956 : ICommand
     {
         public string Command => "scp1956";
 

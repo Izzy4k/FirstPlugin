@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FirstPlugin.Features
 {
-    public class CreateController
+    public sealed class CreateController
     {
 
         private Dictionary<Player, int> SnapShots = TutorialPlugin.TutorialPlugin.SCPController.Snapshots;
@@ -43,12 +43,11 @@ namespace FirstPlugin.Features
                 }
 
                 player.Broadcast(6, message);
+
+                return;
             }
 
-            else
-            {
-                player.Broadcast(6, "У вас нет баллов.");
-            }
+            player.Broadcast(6, "У вас нет баллов.");
         }
 
         private void CreateItem(ItemType type, Vector3 vector)

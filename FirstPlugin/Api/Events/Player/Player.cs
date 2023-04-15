@@ -1,19 +1,19 @@
 ﻿using Exiled.Events.EventArgs.Player;
-using Exiled.API.Features;
+using PlayerAPI = Exiled.API.Features.Player;
 
 namespace FirstPlugin.Api.Events
 {
-    public class EventPlayer
+    public sealed class Player
     {
-        public delegate void PlayerJoinHandler(Player player);
+        public delegate void PlayerJoinHandler(PlayerAPI player);
 
         public static event PlayerJoinHandler OnPlayerJoined;
 
-        public delegate void PlayerLeftHandler(Player player);
+        public delegate void PlayerLeftHandler(PlayerAPI player);
 
         public static event PlayerLeftHandler OnPlayerLeft;
 
-        public delegate void PlayerDeath(Player player);
+        public delegate void PlayerDeath(PlayerAPI player);
 
         public static event PlayerDeath OnPlayerDeath;
 

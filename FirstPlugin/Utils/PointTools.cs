@@ -1,7 +1,7 @@
 ﻿
 namespace FirstPlugin.Utils
 {
-    static class PointTools
+   public static class PointTools
     {
         public static int GetPoint(ItemType item)
         {

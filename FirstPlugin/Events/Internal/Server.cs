@@ -4,7 +4,7 @@ using PluginAPI.Enums;
 
 namespace TutorialPlugin.Events
 {
-     class Server
+   public sealed class Server
     {
         [PluginEvent(ServerEventType.WaitingForPlayers)]
         public void OnWaitingForPlayers()

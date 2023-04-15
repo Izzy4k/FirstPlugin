@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FirstPlugin.Features
 {
-    public class SCPController
+    public sealed class SCPController
     {
         public Dictionary<Player, int> Snapshots { get; } = new Dictionary<Player, int>();
 

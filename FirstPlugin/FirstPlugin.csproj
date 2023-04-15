@@ -74,7 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Events\Player\EventPlayer.cs" />
+    <Compile Include="Api\Events\Player\Player.cs" />
     <Compile Include="Commands\User\Apart.cs" />
     <Compile Include="Commands\User\Create.cs" />
     <Compile Include="Commands\Admin\SCP1956.cs" />

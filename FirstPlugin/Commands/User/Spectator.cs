@@ -8,7 +8,7 @@ using Exiled.API.Features;
 namespace FirstPlugin.Comands
 {
     [CommandHandler(typeof(ClientCommandHandler))]
-    class Spectator : ICommand
+    public sealed class Spectator : ICommand
     {
         public string Command { get; } = "spectator";
 
@@ -29,11 +29,8 @@ namespace FirstPlugin.Comands
                 return false;
             }
 
-            else
-            {
-                response = "Что-то пошло не так.";
-                return true;
-            }
+            response = "Что-то пошло не так.";
+            return true;
         }
     }
 }

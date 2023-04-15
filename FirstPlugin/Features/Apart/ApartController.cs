@@ -5,7 +5,7 @@ using FirstPlugin.Utils;
 
 namespace FirstPlugin.Features
 {
-    public class ApartController
+    public sealed class ApartController
     {
         private Dictionary<Player, int> SnapShots = TutorialPlugin.TutorialPlugin.SCPController.Snapshots;
 
@@ -23,12 +23,11 @@ namespace FirstPlugin.Features
                 SnapShots[player] = SnapShots[player] + PointTools.GetPoint(target.Type);
 
                 player.Broadcast(10, $"Предмет был успешно продан. Вы приобрели - {SnapShots[player]} баллов.");
+
+                return;
             }
 
-            else
-            {
                 player.Broadcast(10, "Нет предмета для продажи. Пожалуйста, возьмите предмет в руки для продажи.");
-            }
         }
 
         private Item DeleteItem(Player player)

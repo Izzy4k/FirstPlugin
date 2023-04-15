@@ -5,7 +5,7 @@ using System;
 namespace FirstPlugin.Comands
 {
     [CommandHandler(typeof(ClientCommandHandler))]
-    public class Apart : ICommand
+    public sealed class Apart : ICommand
     {
         public string Command { get; } = "apart";
 
@@ -18,7 +18,7 @@ namespace FirstPlugin.Comands
         {
             var target = Player.Get((sender as CommandSender)?.SenderId);
 
-            if (target == null)
+            if (target is null)
             {
                 response = "Игрок не найден!";
                 return false;

@@ -4,11 +4,10 @@ using System;
 using FirstPlugin.Features;
 using ServerAPI = Exiled.Events.Handlers.Server;
 using PlayerAPI = Exiled.Events.Handlers.Player;
-using FirstPlugin.Api.Events;
 
 namespace TutorialPlugin
 {
-    public class TutorialPlugin : Plugin<Config>
+    public sealed class TutorialPlugin : Plugin<Config>
     {
         private static readonly Lazy<TutorialPlugin> LazyInstance = new Lazy<TutorialPlugin>(() => new TutorialPlugin());
 
@@ -60,30 +59,30 @@ namespace TutorialPlugin
 
         private void RegisterPlayerEvent()
         {
-            EventPlayer.OnPlayerJoined += player.OnPlayerJoined;
-            EventPlayer.OnPlayerLeft += player.OnPlayerLeft;
-            EventPlayer.OnPlayerDeath += player.OnPlayerDeath;
+            FirstPlugin.Api.Events.Player.OnPlayerJoined += player.OnPlayerJoined;
+            FirstPlugin.Api.Events.Player.OnPlayerLeft += player.OnPlayerLeft;
+            FirstPlugin.Api.Events.Player.OnPlayerDeath += player.OnPlayerDeath;
         }
 
         private void RegisterPlayerApi()
         {
-            PlayerAPI.Verified += EventPlayer.InvokePlayerJoin;
-            PlayerAPI.Left += EventPlayer.InvokePlayerLeft;
-            PlayerAPI.Died += EventPlayer.InvokePlayerDeath;
+            PlayerAPI.Verified += FirstPlugin.Api.Events.Player.InvokePlayerJoin;
+            PlayerAPI.Left += FirstPlugin.Api.Events.Player.InvokePlayerLeft;
+            PlayerAPI.Died += FirstPlugin.Api.Events.Player.InvokePlayerDeath;
         }
 
         private void UnRegisterPlayerEvent()
         {
-            EventPlayer.OnPlayerJoined -= player.OnPlayerJoined;
-            EventPlayer.OnPlayerLeft -= player.OnPlayerLeft;
-            EventPlayer.OnPlayerDeath -= player.OnPlayerDeath;
+            FirstPlugin.Api.Events.Player.OnPlayerJoined -= player.OnPlayerJoined;
+            FirstPlugin.Api.Events.Player.OnPlayerLeft -= player.OnPlayerLeft;
+            FirstPlugin.Api.Events.Player.OnPlayerDeath -= player.OnPlayerDeath;
         }
 
         private void UnRegisterPlayerApi()
         {
-            PlayerAPI.Verified -= EventPlayer.InvokePlayerJoin;
-            PlayerAPI.Left -= EventPlayer.InvokePlayerLeft;
-            PlayerAPI.Died -= EventPlayer.InvokePlayerDeath;
+            PlayerAPI.Verified -= FirstPlugin.Api.Events.Player.InvokePlayerJoin;
+            PlayerAPI.Left -= FirstPlugin.Api.Events.Player.InvokePlayerLeft;
+            PlayerAPI.Died -= FirstPlugin.Api.Events.Player.InvokePlayerDeath;
         }
 
         public void UnRegisterEvents()

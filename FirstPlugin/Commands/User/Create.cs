@@ -5,7 +5,7 @@ using Exiled.API.Features;
 namespace FirstPlugin.Commands
 {
     [CommandHandler(typeof(ClientCommandHandler))]
-    public class Create : ICommand
+    public sealed class Create : ICommand
     {
         public string Command => "create";
 
@@ -17,7 +17,7 @@ namespace FirstPlugin.Commands
         {
             var target = Player.Get((sender as CommandSender)?.SenderId);
 
-            if (target == null)
+            if (target is null)
             {
                 response = "Игрок не найден!";
                 return false;

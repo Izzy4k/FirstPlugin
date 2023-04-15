@@ -6,7 +6,7 @@ using PlayerAPI = Exiled.API.Features.Player;
 
 namespace TutorialPlugin.Events
 {
-    public class Player 
+    public sealed class Player 
     {
 
         [PluginEvent(ServerEventType.PlayerLeft)]
